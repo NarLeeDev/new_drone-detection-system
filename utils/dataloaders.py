@@ -454,7 +454,12 @@ class LoadStreams:
             if s == 0:
                 assert not is_colab(), "--source 0 webcam unsupported on Colab. Rerun command in a local environment."
                 assert not is_kaggle(), "--source 0 webcam unsupported on Kaggle. Rerun command in a local environment."
-            cap = cv2.VideoCapture(s)
+            # Use DirectShow backend on Windows for numeric sources (fixes MSMF grab failures)
+            import platform
+            if platform.system() == "Windows" and isinstance(s, int):
+                cap = cv2.VideoCapture(s, cv2.CAP_DSHOW)
+            else:
+                cap = cv2.VideoCapture(s)
             assert cap.isOpened(), f"{st}Failed to open {s}"
             w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
             h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -489,7 +494,11 @@ class LoadStreams:
                 else:
                     LOGGER.warning("WARNING ⚠️ Video stream unresponsive, please check your IP camera connection.")
                     self.imgs[i] = np.zeros_like(self.imgs[i])
-                    cap.open(stream)  # re-open stream if signal was lost
+                    import platform
+                    if platform.system() == "Windows" and isinstance(stream, int):
+                        cap.open(stream, cv2.CAP_DSHOW)  # re-open stream if signal was lost
+                    else:
+                        cap.open(stream)  # re-open stream if signal was lost
             time.sleep(0.0)  # wait time
 
     def __iter__(self):

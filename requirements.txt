@@ -52,10 +52,10 @@ Flask-CORS>=3.0.10
 wheel>=0.38.0 # not directly required, pinned by Snyk to avoid a vulnerability
 pywin32>=305; platform_system == "Windows"
 
-# Optional dependencies for CUDA support
---extra-index-url https://download.pytorch.org/whl/cu118
-torch>=2.0.0+cu118
-torchvision>=0.15.0+cu118
+# Optional dependencies for CUDA support (uncomment if you have an NVIDIA GPU with CUDA 11.8)
+# --extra-index-url https://download.pytorch.org/whl/cu118
+# torch>=2.0.0+cu118
+# torchvision>=0.15.0+cu118
 
 # Additional dependencies
 python-dotenv>=1.0.0
