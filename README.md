@@ -1,244 +1,244 @@
-# Drone Detection System
+# Система обнаружения беспилотных летательных аппаратов
 
-A real-time drone detection and monitoring system built with YOLOv5 and Next.js. The system provides automated drone detection, recording, and a modern dashboard for monitoring and reviewing detection events.
+Система обнаружения и мониторинга беспилотных летательных аппаратов в режиме реального времени, созданная на основе YOLOv5 и Next.js. Система обеспечивает автоматическое обнаружение беспилотных летательных аппаратов, запись и современную панель мониторинга для мониторинга и просмотра событий обнаружения.
 
-## 🚀 Features
+## 🚀 Особенности
 
-- **Real-time Detection**: Continuous monitoring using YOLOv5 for accurate drone detection
-- **Threat Assessment**: Automatic threat level classification (High/Medium/Low)
-- **Event Recording**: Automated video recording of detection events
-- **Snapshot Capture**: Intelligent snapshot capture system with metadata
-- **Modern Dashboard**: Real-time monitoring interface with:
-  - Live detection feed
-  - Event history
-  - Threat level indicators
-  - Detection analytics
-  - Video playback
+- ** Обнаружение в режиме реального времени**: Непрерывный мониторинг с использованием YOLOv5 для точного обнаружения беспилотников
+- **Оценка угрозы**: Автоматическая классификация уровней угрозы (высокий/средний/ низкий)
+- **Запись событий**: Автоматическая видеозапись событий обнаружения
+- **Snapshot Capture**: Интеллектуальная система сбора моментальных снимков с метаданными
+- **Современная панель мониторинга **: Интерфейс мониторинга в режиме реального времени с:
+ - Прямой трансляцией обнаружения
+ - Историей событий
+ - Индикаторами уровня угрозы
+ - Аналитикой обнаружения
+ - Воспроизведением видео
 
-## 📋 Prerequisites
+## 📋 Предварительные условия
 
-- Python 3.8 or higher
-- Node.js 18.0 or higher
+- Python 3.8 или более поздней версии
+- Node.js 18.0 или более поздней версии
 - Git
-- CUDA-capable GPU (recommended) with CUDA 11.x or higher
-- Webcam or IP camera
+- Графический процессор с поддержкой CUDA (рекомендуется) с CUDA 11.x или более поздней версии
+- Веб-камера или IP-камера
 
-## 🛠️ Installation
+## ➡️ Установка
 
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/yourusername/drone-detection-system.git
-   cd drone-detection-system
-   ```
+1. **Клонировать репозиторий**
+ ``
+клонировать bash git
+https://github.com/yourusername/drone-detection-system.git cd-система обнаружения дронов
+ ```
 
-2. **Set Up Python Environment**
-   ```bash
-   # Create and activate virtual environment
-   python -m venv venv
-   
-   # On Windows
-   .\venv\Scripts\activate
-   
-   # On Linux/Mac
-   source venv/bin/activate
-   
-   # Install Python dependencies
-   pip install -r requirements.txt
-   ```
+2. **Настройте среду Python**
+ ``bash
+ # Создайте и активируйте виртуальную среду
+python -m venv venv
+ 
+ # В Windows
+ .\venv\Scripts\activate
+ 
+ # В Linux/Mac
+исходный код venv/bin/activate
+ 
+ # Установка зависимостей Python
+pip install -r requirements.txt
+ ```
 
-3. **Install Frontend Dependencies**
-   ```bash
-   cd drone-detection-app\ Frontend
-   npm install
-   # or
-   pnpm install
-   ```
+3. **Установите интерфейсные зависимости**
+ ``bash
+cd drone-detection-app\ Frontend
+npm install
+ # или
+установка pnpm
+ ```
 
-4. **Create Required Directories**
-   ```bash
-   # From project root
-   mkdir logs
-   mkdir -p "drone-detection-app Frontend/public/Image logs"
-   ```
+4. **Создайте необходимые каталоги**
+ ``bash
+ # Из корневого каталога проекта
+mkdir logs
+mkdir -p "обнаружение дронов-интерфейс приложения/общедоступные/графические журналы"
+ ```
 
-5. **Environment Setup**
-   
-   Create a `.env` file in the project root:
-   ```env
-   # Detection Settings
-   DRONE_CONF_THRESHOLD=0.5
-   DRONE_BUFFER_SECONDS=15
-   DRONE_POST_DETECTION_SECONDS=7
-   DRONE_RECORDING_EXTENSION=7
-   DRONE_EXTENSION_WINDOW=2
-   DRONE_SNAPSHOT_PROBABILITY=0.75
-   
-   # Paths (optional - will use defaults if not set)
-   DRONE_PROJECT_ROOT=./
-   ```
+5. **Настройка среды**
+ 
+ Создайте файл `.env` в корневом каталоге проекта:
+ ``env
+ # Настройки обнаружения
+ DRONE_CONF_THRESHOLD=0,5
+ DRONE_BUFFER_SECONDS=15
+ DRONE_POST_DETECTION_SECONDS=7
+ DRONE_RECORDING_EXTENSION=7
+ DRONE_EXTENSION_WINDOW=2
+ ВЕРОЯТНОСТЬ ТОГО, ЧТО DRONE_SNAPSHOT СДЕЛАЕТ СНИМОК, РАВНА 0,75
+ 
+ # Пути (необязательно - будут использоваться значения по умолчанию, если они не заданы)
+ DRONE_PROJECT_ROOT=./
+ ```
 
-## 🚀 Running the System
+## 🚀 Запуск системы
 
-1. **Start the Detection System**
-   ```bash
-   # Activate virtual environment if not already activated
-   # Windows
-   .\venv\Scripts\activate
-   # Linux/Mac
-   source venv/bin/activate
-   
-   # Run detection (use webcam)
-   python detect.py --source 0
-   
-   # Or use IP camera
-   python detect.py --source "rtsp://camera-ip"
-   ```
+1. **Запустите систему обнаружения**
+ ``bash
+ # Активируйте виртуальную среду, если она еще не активирована
+ # Windows
+ .\venv\Scripts\activate
+ # Исходный код для Linux/Mac
+venv/bin/activate
+ 
+ # Запустить обнаружение (использовать веб-камеру)
+ python detect.py --исходный код 0
+ 
+ # Или использовать
+python для IP-камеры detect.py --исходный код "rtsp://camera-ip"
+ ```
 
-2. **Launch the Frontend**
-   ```bash
-   cd drone-detection-app\ Frontend
-   npm run dev
-   # or
-   pnpm dev
-   ```
+2. **Запустите интерфейс**
+ ``bash
+cd drone-detection-app\ Frontend
+npm run dev
+ # или
+pnpm dev
+ ```
 
-3. Access the dashboard at `http://localhost:3000`
+3. Откройте панель мониторинга по ссылке "http://localhost:3000`
 
-## 🎯 Configuration Options
+## 🎯 Параметры конфигурации
 
-### Detection Settings
-You can configure the detection system by modifying the `.env` file or passing environment variables:
+### Настройки обнаружения
+Вы можете настроить систему обнаружения, изменив файл `.env` или передав переменные среды:
 
-- `DRONE_CONF_THRESHOLD`: Confidence threshold (0.0-1.0)
-- `DRONE_BUFFER_SECONDS`: Pre-detection buffer duration
-- `DRONE_POST_DETECTION_SECONDS`: Post-detection recording duration
-- `DRONE_RECORDING_EXTENSION`: Additional recording time if drone remains in frame
-- `DRONE_SNAPSHOT_PROBABILITY`: Probability of taking a snapshot (0.0-1.0)
+- `DRONE_CONF_THRESHOLD`: Порог достоверности (0,0-1,0)
+- `DRONE_BUFFER_SECONDS`: Длительность буфера до обнаружения
+- `DRONE_POST_DETECTION_SECONDS`: длительность записи после обнаружения
+- `DRONE_RECORDING_EXTENSION`: дополнительное время записи, если дрон остается в кадре.
+- `DRONE_SNAPSHOT_PROBABILITY`: Вероятность создания моментального снимка (0,0-1,0)
 
-### Command Line Arguments
-The detection script supports various command-line arguments:
+### Аргументы командной строки
+Скрипт обнаружения поддерживает различные аргументы командной строки:
 
-```bash
-python detect.py --help
+``bash
+python detect.py --справка
 ```
 
-Common options:
-- `--source`: Input source (0 for webcam, or RTSP URL)
-- `--conf-thres`: Detection confidence threshold
-- `--weights`: Path to custom weights file
-- `--device`: Device to run on (cuda device, i.e. 0 or cpu)
+Общие параметры:
+- `--source`: источник ввода (0 для веб-камеры или URL-адреса RTSP)
+- `--conf-thres`: Порог достоверности обнаружения
+- `--weights`: Путь к пользовательскому файлу весов.
+- `--device`: устройство, на котором будет выполняться запуск (устройство cuda, например, 0 или cpu)
 
-## 📁 Project Structure
+## 📁 Структура проекта
 
 ```
-drone-detection-system/
-├── detect.py                    # Main detection script
-├── requirements.txt             # Python dependencies
-├── .env                        # Environment configuration
-├── best.pt                     # YOLOv5 model weights
-├── logs/                       # Detection video storage
-└── drone-detection-app Frontend/ # Frontend application
-    ├── app/                    # Next.js application
-    │   ├── api/               # API routes
-    │   ├── components/        # React components
-    │   └── dashboard/         # Dashboard pages
-    ├── public/                # Static assets
-    │   └── Image logs/        # Detection snapshots
-    └── package.json           # Frontend dependencies
+система обнаружения дронов/
+├── detect.py # Основной сценарий обнаружения
+├── requirements.txt # Зависимости на Python
+├── .env # Конфигурация среды
+├── best.pt # Веса модели YOLOv5
+├── журналы/ # Хранилище видео обнаружения
+└── интерфейс приложения для обнаружения дронов / # Интерфейсное приложение
+ ├── приложение / # Next.js приложение
+ │ ├── api / # маршруты API
+ │ ├── компоненты/ # Компоненты React
+ │ └── панель мониторинга/ # Страницы панели мониторинга
+ ├── общедоступные/ # Статические ресурсы
+ │ └── Журналы изображений/ # Снимки обнаружения
+ └── package.json # Зависимости интерфейса
 ```
 
-## 🔧 Troubleshooting
+## 🔧 Устранение неполадок
 
-1. **No Detection Output**
-   - Ensure webcam/camera is properly connected
-   - Check if CUDA is properly installed for GPU support
-   - Verify confidence threshold isn't too high
+1. **Нет результатов обнаружения**
+   - Убедитесь, что веб-камера или камера подключена правильно.
+   - Проверьте, правильно ли установлен CUDA для поддержки графического процессора.
+   - Убедитесь, что порог достоверности не слишком высок.
 
-2. **Frontend Not Loading**
-   - Check if Node.js is properly installed
-   - Verify all frontend dependencies are installed
-   - Check console for error messages
+2. **Фронтенд не загружается**
+   - Проверьте, правильно ли установлен Node.js.
+   - Убедитесь, что установлены все зависимости фронтенда.
+   - Проверьте консоль на наличие сообщений об ошибках.
 
-3. **Missing Snapshots/Recordings**
-   - Verify required directories exist and have write permissions
-   - Check disk space availability
-   - Review application logs for errors
+3. **Отсутствуют снимки/записи**
+   - Убедитесь, что необходимые каталоги существуют и имеют права на запись.
+   - Проверьте, достаточно ли места на диске.
+   - Просмотрите логи приложения на наличие ошибок.
 
-## 📝 License
+## 📝 Лицензия
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+Этот проект лицензирован по лицензии MIT. Подробнее см. в файле LICENSE.
 
-## 🤝 Contributing
+## 🤝 Вклад в развитие
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Мы будем рады вашему вкладу! Пожалуйста, не стесняйтесь отправлять пул-реквесты.
 
-## 📡 API Endpoints
+## 📡 Конечные точки API
 
-### Core Detection APIs
-- `POST /api/startDetection` - Start detection
-- `POST /api/stopDetection` - Stop detection
-- `GET /api/snapshots` - Fetch detection events
+### Основные API обнаружения
+- `POST /api/startDetection` — запуск обнаружения
+- `POST /api/stopDetection` - Остановка обнаружения
+- `GET /api/snapshots` - Получение событий обнаружения
 
-### Media Handling
-- `GET /api/video/[filename]` - Stream video
-- `GET /api/thumbnail/[filename]` - Get video thumbnail
-- `GET /api/recordings` - List all recordings
+### Обработка медиафайлов
+- `GET /api/video/[filename]` - Потоковая передача видео
+- `GET /api/thumbnail/[filename]` - Получение миниатюры видео
+- `GET /api/recordings` - Список всех записей
 
-## 🔐 Security Features
+## 🔐 Функции безопасности
 
-- CORS protection
-- File path sanitization
-- Proper error handling
-- Secure video streaming
-- Rate limiting on API routes
+- Защита CORS
+- Очистка путей к файлам
+- Правильная обработка ошибок
+- Безопасная потоковая передача видео
+- Ограничение частоты запросов к API
 
-## 🔄 Detection Process
+## 🔄 Процесс обнаружения
 
-1. **Continuous Monitoring**
-   - Real-time video feed processing
-   - Frame buffer maintenance
-   - YOLOv5 inference
+1. **Непрерывный мониторинг**
+   - Обработка видеопотока в реальном времени
+   - Поддержание буфера кадров
+   - Вывод данных YOLOv5
 
-2. **Event Detection**
-   - Drone identification
-   - Confidence scoring
-   - Threat level assessment
+2. **Обнаружение событий**
+   - Идентификация дронов
+   - Оценка достоверности
+   - Оценка уровня угрозы
 
-3. **Recording & Storage**
-   - Automatic video recording
-   - Snapshot capture
-   - Metadata generation
+3. **Запись и хранение**
+   - Автоматическая запись видео
+   - Создание снимков
+   - Генерация метаданных
 
-## 📊 Metadata Structure
+## 📊 Структура метаданных
 
 ```json
 {
   "image": {
-    "filename": "string",
+    "filename": "строка",
     "timestamp": "ISO-8601",
     "dimensions": {
-      "width": "number",
-      "height": "number",
-      "channels": "number"
+      "width": "число",
+      "height": "число",
+      "channels": "число"
     }
   },
   "detection": {
-    "droneType": "string",
-    "confidence": "number",
-    "threatLevel": "string",
-    "coordinates": "number[][]"
+    "droneType": "строка",
+    "confidence": "число",
+    "threatLevel": "строка",
+    "coordinates": "число[][]"
   },
   "system": {
     "captureTime": "ISO-8601",
     "deviceInfo": {
-      "platform": "string",
-      "version": "string",
-      "machine": "string"
+      "platform": "строка",
+      "version": "строка",
+      "machine": "строка"
     }
   }
 }
 ```
 
-## 📞 Support
+## 📞 Поддержка
 
-For issues and feature requests, please use the GitHub issue tracker. 
+Для сообщений о проблемах и предложений по улучшению используйте систему отслеживания проблем на GitHub.
